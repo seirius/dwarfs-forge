@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="editor" #editor>
+        <form action="">
+            <div>
+                <label for="editType">Edit type</label>
+                <select name="editType" id="editType" [(ngModel)]="editType" (ngModelChange)="focusCanvas()">
+                    <option value="add">Add block</option>
+                    <option value="remove">Remove block</option>
+                </select>
+            </div>
+            <div>
+                <label for="blockType">Block type</label>
+                <select name="blockType" id="blockType" [(ngModel)]="blockType" (ngModelChange)="focusCanvas()">
+                    <option value="dirt">Dirt</option>
+                    <option value="cobblestone">Cobblestone</option>
+                </select>
+            </div>
+            <button type="button" (click)="clearAll()">Clear all</button>
+            <div class="right">
+                <button type="button" (click)="export()">Export</button>
+                <input class="hidden" type="file" accept=".json" (change)="import($event)" #importFile>
+                <button type="button" (click)="importFile.click()">Import</button>
+            </div>
+        </form>
+    </div>
+    <app-forge [heightOffset]="heightOffset" [brushType]="editType" [blockType]="blockType" #forge></app-forge>
+</div>

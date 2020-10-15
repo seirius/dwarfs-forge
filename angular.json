@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "dwarfs-forge"
+    }
+  },
+  "defaultProject": "dwarfs-forge",
+  "cli": {
+    "analytics": false
+  }
 }
