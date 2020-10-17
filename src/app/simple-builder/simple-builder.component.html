@@ -13,6 +13,7 @@
                 <select name="blockType" id="blockType" [(ngModel)]="blockType" (ngModelChange)="focusCanvas()">
                     <option value="dirt">Dirt</option>
                     <option value="cobblestone">Cobblestone</option>
+                    <option value="stone">Stone</option>
                 </select>
             </div>
             <button type="button" (click)="clearAll()">Clear all</button>
@@ -23,5 +24,7 @@
             </div>
         </form>
     </div>
-    <app-forge [heightOffset]="heightOffset" [brushType]="editType" [blockType]="blockType" #forge></app-forge>
+    <div class="main">
+        <app-forge *ngIf="editorReady" [heightOffset]="heightOffset" [brushType]="editType" [blockType]="blockType" #forge></app-forge>
+    </div>
 </div>

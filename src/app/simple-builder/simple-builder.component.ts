@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BlockTypes } from '../block-service/block.service';
 import { DownloadService } from '../download-service/download.service';
 import { ForgeComponent } from '../forge/forge.component';
@@ -23,6 +23,8 @@ export class SimpleBuilderComponent implements OnInit, AfterViewInit {
     @ViewChild("forge")
     public forge: ForgeComponent;
 
+    public editorReady = false;
+
     public get heightOffset(): number {
         return this.editor.nativeElement.getBoundingClientRect().height;
     }
@@ -32,12 +34,15 @@ export class SimpleBuilderComponent implements OnInit, AfterViewInit {
     public blockType = BlockTypes.DIRT.name;
 
     constructor(
-        private downloadService: DownloadService
+        private downloadService: DownloadService,
+        private cdr: ChangeDetectorRef
     ) { }
 
     public ngOnInit(): void { }
 
     public ngAfterViewInit(): void {
+        this.editorReady = true;
+        this.cdr.detectChanges();
     }
 
     public export(): void {
