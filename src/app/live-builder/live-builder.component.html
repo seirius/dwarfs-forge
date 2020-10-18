@@ -11,20 +11,19 @@
             <div>
                 <label for="blockType">Block type</label>
                 <select name="blockType" id="blockType" [(ngModel)]="blockType" (ngModelChange)="focusCanvas()">
-                    <option value="Block{minecraft:dirt}">Dirt</option>
-                    <option value="Block{minecraft:cobblestone}">Cobblestone</option>
-                    <option value="Block{minecraft:stone}">Stone</option>
+                    <option *ngFor="let blockType of enumBlockTypes" [value]="blockType.value">{{blockType.label}}
+                    </option>
                 </select>
             </div>
-            <button type="button" (click)="clearAll()">Clear all</button>
             <div class="right">
-                <button type="button" (click)="export()">Export</button>
-                <input class="hidden" type="file" accept=".json" (change)="import($event)" #importFile>
-                <button type="button" (click)="importFile.click()">Import</button>
+                <button type="button" (click)="showMap()">Map</button>
             </div>
         </form>
     </div>
     <div class="main">
+        <div class="the-eye" [class.hidden]="!mapFlag">
+            <app-the-eye (mapClick)="theEyeClick($event)"></app-the-eye>
+        </div>
         <app-forge *ngIf="editorReady" [gridWidth]="256" [gridSegments]="16" [heightOffset]="heightOffset"
             [brushType]="editType" [blockType]="blockType" #forge></app-forge>
     </div>

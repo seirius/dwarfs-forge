@@ -22,8 +22,8 @@ export class ForgeService {
     private static readonly FOV = 45;
     private static readonly NEAR = 1;
     private static readonly FAR = 10000;
-    private static readonly GRID_WIDTH = 256;
-    private static readonly GRID_WIDTH_SEGMENTS = 16;
+    private gridWidth = 256;
+    private gridWidthSegments = 16;
     private static readonly BACKGROUND_COLOR = '#1f2e30';
 
     private static readonly SUB_VECTOR = new THREE.Vector3(
@@ -68,13 +68,22 @@ export class ForgeService {
     }
 
     public init({
-        main, width, height, heightOffset: offsetHeight
+        main,
+        width,
+        height,
+        gridSegments,
+        gridWidth,
+        heightOffset: offsetHeight
     }: {
         main: ElementRef;
         width: number;
         height: number;
+            gridSegments: number;
+            gridWidth: number;
         heightOffset?: number;
     }): void {
+        this.gridWidth = gridWidth;
+        this.gridWidthSegments = gridSegments;
         if (offsetHeight) {
             this.heightOffset = offsetHeight;
         }
@@ -128,8 +137,8 @@ export class ForgeService {
     }
 
     public addPlane(): void {
-        this.scene.add(new THREE.GridHelper(ForgeService.GRID_WIDTH, ForgeService.GRID_WIDTH_SEGMENTS));
-        const geometry = new THREE.PlaneBufferGeometry(ForgeService.GRID_WIDTH, ForgeService.GRID_WIDTH);
+        this.scene.add(new THREE.GridHelper(this.gridWidth, this.gridWidthSegments));
+        const geometry = new THREE.PlaneBufferGeometry(this.gridWidth, this.gridWidth);
         geometry.rotateX(-Math.PI / 2);
         this.plane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ visible: false }));
         this.objects.push({

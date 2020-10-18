@@ -36,6 +36,12 @@ export class ForgeComponent implements OnInit, AfterViewInit {
         this.forgeService.blockType = blockType;
     }
 
+    @Input()
+    public gridSegments: number = 16;
+
+    @Input()
+    public gridWidth: number = 256;
+
     constructor(
         private forgeService: ForgeService
     ) { }
@@ -47,6 +53,8 @@ export class ForgeComponent implements OnInit, AfterViewInit {
         const { width, height } = this.main.nativeElement.getBoundingClientRect();
         this.forgeService.init({
             main: this.main,
+            gridSegments: this.gridSegments,
+            gridWidth: this.gridWidth,
             heightOffset: this.heightOffset,
             width,
             height

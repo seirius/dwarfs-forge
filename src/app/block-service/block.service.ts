@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as THREE from 'three';
 
 export interface BlockType {
+    label: string;
     name: string;
     path: string | string[];
 }
@@ -10,20 +11,39 @@ export const BlockTypes: {
     DIRT: BlockType;
     COBBLESTONE: BlockType;
     STONE: BlockType;
+    WATER: BlockType;
+    SAND: BlockType;
 } = {
     DIRT: {
-        name: 'dirt',
+        label: 'Dirt',
+        name: 'Block{minecraft:dirt}',
         path: 'dirt.png'
     },
     COBBLESTONE: {
-        name: 'cobblestone',
+        label: 'Cobblestone',
+        name: 'Block{minecraft:cobblestone}',
         path: 'cobblestone.png'
     },
     STONE: {
-        name: 'stone',
+        label: 'Stone',
+        name: 'Block{minecraft:stone}',
         path: 'stone.png'
+    },
+    WATER: {
+        label: 'Water',
+        name: 'Block{minecraft:water}[level=0]',
+        path: 'water.png'
+    },
+    SAND: {
+        label: 'Sand',
+        name: 'Block{minecraft:sand}',
+        path: 'sand.png'
     }
 };
+
+export const EnumaretedBlockTypes = Object
+    .values(BlockTypes)
+    .map(({ label, name }) => ({ label, value: name }));
 
 @Injectable()
 export class BlockService {

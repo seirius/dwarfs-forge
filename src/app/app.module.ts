@@ -9,17 +9,23 @@ import { BlockService } from './block-service/block.service';
 import { DownloadService } from './download-service/download.service';
 import { ForgeComponent } from './forge/forge.component';
 import { SimpleBuilderComponent } from './simple-builder/simple-builder.component';
+import { LiveBuilderComponent } from './live-builder/live-builder.component';
+import { TheEyeComponent } from './the-eye/the-eye.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     ForgeComponent,
-    SimpleBuilderComponent
+    SimpleBuilderComponent,
+    LiveBuilderComponent,
+    TheEyeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     KeyService,
